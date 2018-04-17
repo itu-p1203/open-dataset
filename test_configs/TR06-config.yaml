@@ -1,0 +1,287 @@
+audioCodec: AAC-LC
+audioVisualQualityLevels:
+-   - 1080
+    - 10000
+    - Q7
+    - 196
+-   - 1080
+    - 2500
+    - Q6
+    - 128
+-   - 480
+    - 500
+    - Q4
+    - 96
+-   - 240
+    - 150
+    - Q2
+    - 64
+defaultVideoDurationInSec: 180
+displayHeight: 1080
+ffmpegCommonAudioParams: ' -map 0:1 -acodec libfdk_aac -ac 2 '
+ffmpegCommonVideoParams: ' -y -map 0:0 -c:v libx264 -pix_fmt yuv420p -preset medium
+    -profile:v high10 -level 4.0 '
+hrcList:
+    HRC01:
+        eventList:
+        -   - Q7
+            - 1.0
+        type: customPercent
+    HRC02:
+        eventList:
+        -   - Q6
+            - 20
+        -   - Q4
+            - 15
+        -   - stall
+            - 12
+        -   - Q4
+            - 5
+        -   - Q2
+            - 5
+        -   - stall
+            - 12
+        -   - Q2
+            - 135
+        type: customSeconds
+    HRC03:
+        eventList:
+        -   - Q2
+            - 1.0
+        type: customPercent
+    HRC04:
+        eventList:
+        -   - Q6
+            - 140
+        -   - stall
+            - 15
+        -   - Q6
+            - 40
+        type: customSeconds
+    HRC12:
+        eventList:
+        -   - Q6
+            - 115
+        -   - Q4
+            - 10
+        -   - Q2
+            - 10
+        -   - Q4
+            - 10
+        -   - Q6
+            - 35
+        type: customSeconds
+    HRC13:
+        eventList:
+        -   - Q6
+            - 15
+        -   - Q4
+            - 10
+        -   - Q2
+            - 10
+        -   - Q4
+            - 10
+        -   - Q6
+            - 20
+        -   - Q4
+            - 10
+        -   - Q2
+            - 10
+        -   - Q4
+            - 10
+        -   - Q6
+            - 20
+        -   - Q4
+            - 10
+        -   - Q2
+            - 10
+        -   - Q4
+            - 10
+        -   - Q6
+            - 35
+        type: customSeconds
+    HRC14:
+        eventList:
+        -   - Q6
+            - 40
+        -   - Q4
+            - 35
+        -   - Q2
+            - 35
+        -   - Q4
+            - 35
+        -   - Q6
+            - 35
+        type: customSeconds
+    HRC15:
+        eventList:
+        -   - Q2
+            - 40
+        -   - Q4
+            - 35
+        -   - Q6
+            - 35
+        -   - Q4
+            - 35
+        -   - Q2
+            - 35
+        type: customSeconds
+    HRC16:
+        eventList:
+        -   - Q2
+            - 15
+        -   - Q4
+            - 10
+        -   - Q6
+            - 10
+        -   - Q4
+            - 10
+        -   - Q2
+            - 20
+        -   - Q4
+            - 10
+        -   - Q6
+            - 10
+        -   - Q4
+            - 10
+        -   - Q2
+            - 20
+        -   - Q4
+            - 10
+        -   - Q6
+            - 10
+        -   - Q4
+            - 10
+        -   - Q2
+            - 35
+        type: customSeconds
+    HRC17:
+        eventList:
+        -   - Q6
+            - 105
+        -   - Q4
+            - 10
+        -   - Q2
+            - 10
+        -   - Q4
+            - 10
+        -   - Q6
+            - 5
+        -   - stall
+            - 15
+        -   - Q6
+            - 40
+        type: customSeconds
+    HRC18:
+        eventList:
+        -   - Q6
+            - 40
+        -   - Q4
+            - 35
+        -   - Q2
+            - 15
+        -   - stall
+            - 15
+        -   - Q2
+            - 20
+        -   - Q4
+            - 35
+        -   - Q6
+            - 35
+        type: customSeconds
+minBufferingDistanceToEndInSec: 5
+minBufferingDistanceToStartInSec: 5
+pvsList:
+-   - SRC01_HRC01
+    - SRC01
+    - HRC01
+-   - SRC02_HRC01
+    - SRC02
+    - HRC01
+-   - SRC03_HRC02
+    - SRC03
+    - HRC02
+-   - SRC04_HRC02
+    - SRC04
+    - HRC02
+-   - SRC05_HRC03
+    - SRC05
+    - HRC03
+-   - SRC06_HRC03
+    - SRC06
+    - HRC03
+-   - SRC07_HRC04
+    - SRC07
+    - HRC04
+-   - SRC08_HRC04
+    - SRC08
+    - HRC04
+-   - SRC15_HRC12
+    - SRC15
+    - HRC12
+-   - SRC11_HRC12
+    - SRC11
+    - HRC12
+-   - SRC13_HRC13
+    - SRC13
+    - HRC13
+-   - SRC17_HRC13
+    - SRC17
+    - HRC13
+-   - SRC09_HRC14
+    - SRC09
+    - HRC14
+-   - SRC31_HRC14
+    - SRC31
+    - HRC14
+-   - SRC18_HRC15
+    - SRC18
+    - HRC15
+-   - SRC21_HRC15
+    - SRC21
+    - HRC15
+-   - SRC10_HRC16
+    - SRC10
+    - HRC16
+-   - SRC32_HRC16
+    - SRC32
+    - HRC16
+-   - SRC16_HRC17
+    - SRC16
+    - HRC17
+-   - SRC14_HRC17
+    - SRC14
+    - HRC17
+-   - SRC19_HRC18
+    - SRC19
+    - HRC18
+-   - SRC20_HRC18
+    - SRC20
+    - HRC18
+segmentDurationInSec: 5
+srcList:
+    SRC01: f8d7dbd98c6bc12ca6269f466f66c427
+    SRC02: 8b243ee30784cb5723e7ce5519086dd5
+    SRC03: 88ef14a5ac295ca266c444fd94bcda4f
+    SRC04: 6997e5ae00de496d999ee45c04760f28
+    SRC05: 59e173e848083bf76576b64c850ebff3
+    SRC06: 52b6e2ce1d13a091a4cc315ad2eb7a1d
+    SRC07: 79d9d2785c295a052b38a6b1297d7f59
+    SRC08: 8d7572d372bc20c3bf6e0e13d6bcdfd5
+    SRC09: 8f3c6fa2705698fa37f5c02f3fed0711
+    SRC10: 327372e42f9fa718a13037b3075bda6a
+    SRC11: dca47439d2f5dc6ec1f29bda6de97b7a
+    SRC13: 5ab8ca813546c84f442f401b32db2e4e
+    SRC14: 3cbb36108a0c8b2ef4904e36f087bd66
+    SRC15: 5987acae8d0b0ca0880f0190afdc27f4
+    SRC16: c876cf586a1b2711c54d4ac9453c7a8a
+    SRC17: faf03d9b8569736e1ce2574746977907
+    SRC18: 4be341f421f54fb90602b8966a79a9d9
+    SRC19: f8cf212828486e164982f9057ae8793f
+    SRC20: 657bd51622f7ac2e66232a498ac31cfd
+    SRC21: 62bad04a13d060d2f08320e5c97f72eb
+    SRC31: 5fed1aa189625c730b29f609def8a256
+    SRC32: 5ba7b3142a8b6be0e3e179eaa829483b
+testName: TR06
+videoCodec: H264
+x264CommonParams: ' -x264opts merange=64:me=umh:b-pyramid=strict:slices=1:b-adapt=0:bframes=3:scenecut=-1:threads=1'

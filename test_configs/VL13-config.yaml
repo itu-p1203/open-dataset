@@ -1,0 +1,550 @@
+GopLengthInSecPerQl:
+    Q1080: 1
+    Q108022: 2
+    Q108055: 5
+    Q1080H: 1
+    Q240: 1
+    Q24022: 2
+    Q24055: 5
+    Q360: 1
+    Q36022: 2
+    Q36055: 5
+    Q480: 1
+    Q48022: 2
+    Q48055: 5
+    Q720: 1
+    Q72022: 2
+    Q72055: 5
+audioVisualQualityLevels:
+-   - 1080
+    - 10000
+    - Q1080H
+    - 196
+-   - 1080
+    - 2500
+    - Q1080
+    - 128
+-   - 720
+    - 1400
+    - Q720
+    - 128
+-   - 480
+    - 500
+    - Q480
+    - 96
+-   - 360
+    - 400
+    - Q360
+    - 96
+-   - 240
+    - 150
+    - Q240
+    - 64
+-   - 1080
+    - 2500
+    - Q108055
+    - 128
+-   - 720
+    - 1200
+    - Q72055
+    - 128
+-   - 480
+    - 400
+    - Q48055
+    - 96
+-   - 360
+    - 300
+    - Q36055
+    - 96
+-   - 240
+    - 150
+    - Q24055
+    - 64
+-   - 1080
+    - 2500
+    - Q108022
+    - 128
+-   - 720
+    - 1300
+    - Q72022
+    - 128
+-   - 480
+    - 450
+    - Q48022
+    - 96
+-   - 360
+    - 350
+    - Q36022
+    - 96
+-   - 240
+    - 150
+    - Q24022
+    - 64
+defaultVideoDurationInSec: 240
+displayHeight: 1080
+ffmpegCommonAudioParams: ' -map 0:1 -acodec libfdk_aac -ac 2 '
+ffmpegCommonVideoParams: ' -y -map 0:0 -c:v libx264 -pix_fmt yuv420p -preset medium
+    -profile:v high10 -level 4.0 '
+hrcList:
+    HRC01:
+        eventList:
+        -   - Q1080
+            - 240
+        type: customSeconds
+    HRC02:
+        eventList:
+        -   - Q1080
+            - 30
+        -   - Q480
+            - 20
+        -   - stall
+            - 12
+        -   - Q480
+            - 5
+        -   - Q240
+            - 5
+        -   - stall
+            - 12
+        -   - Q240
+            - 180
+        type: customSeconds
+    HRC03:
+        eventList:
+        -   - Q480
+            - 120
+        -   - stall
+            - 20
+        -   - Q720
+            - 120
+        type: customSeconds
+    HRC04:
+        eventList:
+        -   - Q720
+            - 60
+        -   - stall
+            - 8
+        -   - Q480
+            - 30
+        -   - stall
+            - 8
+        -   - Q480
+            - 30
+        -   - stall
+            - 8
+        -   - Q480
+            - 30
+        -   - stall
+            - 8
+        -   - Q480
+            - 30
+        -   - stall
+            - 8
+        -   - Q720
+            - 60
+        type: customSeconds
+    HRC05:
+        eventList:
+        -   - Q480
+            - 35
+        -   - Q720
+            - 55
+        -   - Q480
+            - 90
+        -   - Q720
+            - 45
+        -   - Q480
+            - 15
+        type: customSeconds
+    HRC06:
+        eventList:
+        -   - Q240
+            - 15
+        -   - Q480
+            - 15
+        -   - Q720
+            - 60
+        -   - Q480
+            - 30
+        -   - Q240
+            - 30
+        -   - Q480
+            - 30
+        -   - Q720
+            - 60
+        type: customSeconds
+    HRC07:
+        eventList:
+        -   - Q240
+            - 15
+        -   - Q480
+            - 15
+        -   - Q720
+            - 60
+        -   - Q480
+            - 15
+        -   - Q240
+            - 15
+        -   - Q480
+            - 15
+        -   - Q720
+            - 45
+        -   - Q480
+            - 15
+        -   - Q240
+            - 15
+        -   - Q480
+            - 15
+        -   - Q720
+            - 15
+        type: customSeconds
+    HRC08:
+        eventList:
+        -   - Q1080
+            - 30
+        -   - Q480
+            - 30
+        -   - Q360
+            - 30
+        -   - Q240
+            - 30
+        -   - Q360
+            - 30
+        -   - Q480
+            - 30
+        -   - Q720
+            - 60
+        type: customSeconds
+    HRC09:
+        eventList:
+        -   - Q72055
+            - 60
+        -   - Q48055
+            - 10
+        -   - Q72055
+            - 10
+        -   - Q48055
+            - 10
+        -   - Q72055
+            - 10
+        -   - Q48055
+            - 10
+        -   - Q72055
+            - 10
+        -   - Q48055
+            - 10
+        -   - Q72055
+            - 10
+        -   - Q48055
+            - 10
+        -   - Q72055
+            - 10
+        -   - Q48055
+            - 10
+        -   - Q72055
+            - 10
+        -   - Q108055
+            - 60
+        type: customSeconds
+    HRC10:
+        eventList:
+        -   - Q72055
+            - 30
+        -   - Q48055
+            - 10
+        -   - Q24055
+            - 10
+        -   - Q48055
+            - 10
+        -   - Q72055
+            - 10
+        -   - Q48055
+            - 10
+        -   - Q24055
+            - 10
+        -   - Q48055
+            - 10
+        -   - Q72055
+            - 10
+        -   - Q48055
+            - 10
+        -   - Q24055
+            - 10
+        -   - Q48055
+            - 10
+        -   - Q72055
+            - 10
+        -   - Q48055
+            - 10
+        -   - Q24055
+            - 10
+        -   - Q48055
+            - 10
+        -   - Q72055
+            - 10
+        -   - Q48055
+            - 10
+        -   - Q72055
+            - 10
+        -   - Q108055
+            - 30
+        type: customSeconds
+    HRC11:
+        eventList:
+        -   - Q72055
+            - 30
+        -   - Q36055
+            - 20
+        -   - Q72055
+            - 30
+        -   - Q36055
+            - 20
+        -   - Q72055
+            - 30
+        -   - Q36055
+            - 20
+        -   - Q72055
+            - 20
+        -   - Q36055
+            - 20
+        -   - Q72055
+            - 20
+        -   - Q108055
+            - 30
+        type: customSeconds
+    HRC12:
+        eventList:
+        -   - Q72055
+            - 60
+        -   - Q48055
+            - 10
+        -   - Q24055
+            - 10
+        -   - Q48055
+            - 10
+        -   - Q72055
+            - 10
+        -   - Q48055
+            - 10
+        -   - Q24055
+            - 10
+        -   - Q48055
+            - 10
+        -   - Q72055
+            - 10
+        -   - Q48055
+            - 10
+        -   - Q24055
+            - 10
+        -   - Q48055
+            - 10
+        -   - Q72055
+            - 10
+        -   - Q108055
+            - 60
+        type: customSeconds
+    HRC13:
+        eventList:
+        -   - Q72055
+            - 60
+        -   - Q48055
+            - 5
+        -   - Q24055
+            - 5
+        -   - Q48055
+            - 5
+        -   - Q72055
+            - 5
+        -   - Q48055
+            - 5
+        -   - Q24055
+            - 5
+        -   - Q48055
+            - 5
+        -   - Q72055
+            - 5
+        -   - Q48055
+            - 5
+        -   - Q24055
+            - 5
+        -   - Q48055
+            - 5
+        -   - Q72055
+            - 5
+        -   - Q48055
+            - 5
+        -   - Q24055
+            - 5
+        -   - Q48055
+            - 5
+        -   - Q72055
+            - 5
+        -   - Q48055
+            - 5
+        -   - Q24055
+            - 5
+        -   - Q48055
+            - 5
+        -   - Q72055
+            - 5
+        -   - Q48055
+            - 5
+        -   - Q24055
+            - 5
+        -   - Q48055
+            - 5
+        -   - Q72055
+            - 5
+        -   - Q108055
+            - 60
+        type: customSeconds
+    HRC14:
+        eventList:
+        -   - Q48055
+            - 30
+        -   - stall
+            - 4
+        -   - Q36055
+            - 15
+        -   - Q48055
+            - 35
+        -   - stall
+            - 4
+        -   - Q36055
+            - 15
+        -   - Q48055
+            - 35
+        -   - stall
+            - 4
+        -   - Q36055
+            - 15
+        -   - Q48055
+            - 30
+        -   - stall
+            - 4
+        -   - Q36055
+            - 15
+        -   - Q48055
+            - 30
+        -   - Q108055
+            - 20
+        type: customSeconds
+    HRC15:
+        eventList:
+        -   - Q48055
+            - 30
+        -   - stall
+            - 4
+        -   - Q36055
+            - 15
+        -   - Q48055
+            - 15
+        -   - Q108055
+            - 20
+        -   - stall
+            - 4
+        -   - Q36055
+            - 15
+        -   - Q48055
+            - 15
+        -   - Q108055
+            - 20
+        -   - stall
+            - 4
+        -   - Q36055
+            - 15
+        -   - Q48055
+            - 10
+        -   - Q108055
+            - 20
+        -   - stall
+            - 4
+        -   - Q36055
+            - 15
+        -   - Q48055
+            - 10
+        -   - Q108055
+            - 40
+        type: customSeconds
+minBufferingDistanceToEndInSec: 5
+minBufferingDistanceToStartInSec: 5
+pvsList:
+-   - PVS01
+    - SRC001
+    - HRC01
+-   - PVS02
+    - SRC002
+    - HRC02
+-   - PVS03
+    - SRC750
+    - HRC03
+-   - PVS04
+    - SRC751
+    - HRC04
+-   - PVS05
+    - SRC752
+    - HRC05
+-   - PVS06
+    - SRC753
+    - HRC06
+-   - PVS07
+    - SRC754
+    - HRC07
+-   - PVS08
+    - SRC755
+    - HRC08
+-   - PVS09
+    - SRC756
+    - HRC09
+-   - PVS10
+    - SRC757
+    - HRC10
+-   - PVS11
+    - SRC710
+    - HRC11
+-   - PVS12
+    - SRC758
+    - HRC12
+-   - PVS13
+    - SRC759
+    - HRC13
+-   - PVS14
+    - SRC715
+    - HRC14
+-   - PVS15
+    - SRC718
+    - HRC15
+segmentDurationInSecPerQl:
+    Q1080: 5
+    Q108022: 2
+    Q108055: 5
+    Q1080H: 5
+    Q240: 5
+    Q24022: 2
+    Q24055: 5
+    Q360: 5
+    Q36022: 2
+    Q36055: 5
+    Q480: 5
+    Q48022: 2
+    Q48055: 5
+    Q720: 5
+    Q72022: 2
+    Q72055: 5
+srcList:
+    SRC001: 721d3b6cecd29caa9cd38f44f55d234c
+    SRC002: 913fa17e0c211414bb54a59e012ffd38
+    SRC710: 768bfad7009021e28a542b2508570bd3
+    SRC715: fe9a889920d962e5db2c9efae0d3b194
+    SRC718: ea29361d490080234074ef8cd971bb5a
+    SRC750: 812c178391401d2f72f8a736a94056aa
+    SRC751: 6cad1c44379a87d086ee2e034aeea9c0
+    SRC752: e38b4e777c73fd66e95d87a816acf2ae
+    SRC753: ad48f36cdfbce4039d1aad38eabc0486
+    SRC754: 5d745edfa025c40617ed6fcebf8c44cb
+    SRC755: a3aaf9c4eeb196ff7898ed32c6f4ec7a
+    SRC756: e0c6f5461f0f5101e2baa06380f32a97
+    SRC757: ecb17abff80b5ea19cf5540fb4fd06c1
+    SRC758: 57859582dc9b697cb499ee26c8fbf66c
+    SRC759: 422bcb5de9db0a1575921247ea933767
+testName: VL13
+x264CommonParams: ' -x264opts merange=64:me=umh:b-pyramid=strict:slices=1:b-adapt=0:bframes=3:scenecut=-1:threads=1'
