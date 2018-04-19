@@ -6,6 +6,7 @@ This open dataset from the ITU-T P.1203 standardization procedure (P.NATS) conta
 - Feature data:
     - Mode 0 (metadata-level)
     - Mode 1 (packet-header-level)
+    - Mode 2 (bitstream-level, 2 percent)
     - Mode 3 (bitstream-level)
 - Subjective ratings
 - Model scores
