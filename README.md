@@ -152,7 +152,7 @@ Subjective test database design:
 
 ## License
 
-Copyright 2018 Deutsche Telekom AG, LM Ericsson, Netscout
+Copyright 2018 Deutsche Telekom AG, LM Ericsson, NETSCOUT Systems Inc.
 
 Permission is hereby granted, free of charge, to use this dataset for non-commercial research purposes.
 
