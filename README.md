@@ -67,7 +67,8 @@ The following features are available:
     - `noni_sizes_average`: Average size of non-I frames
     - `sample_index`: Index of the output sample (1 per second)
     - `pvs_id`: Identifier of the PVS
-- `features/features_mode3.tar.bz2`: Per-output-sample aggregated features used for Pv mode 2 and 3, as parsed by the measurement window. One CSV file for each PVS, with columns:
+- `features/features_mode2.tar.bz2`: Per-output-sample aggregated features used for Pv mode 2, as parsed by the measurement window. One CSV file for each PVS, see column description below. If `BS_TwoPercentQP1` is not present, 2% of the bitstream are not enough to provide bitstream data, hence the features from mode 1 needs to be used for calculation.
+- `features/features_mode3.tar.bz2`: Per-output-sample aggregated features used for Pv mode 3, as parsed by the measurement window. One CSV file for each PVS, with columns:
     - `pvs_id`: Identifier of the PVS
     - `mode`: (fixed to 3)
     - `codec`: Video codec (fixed to H.264)
