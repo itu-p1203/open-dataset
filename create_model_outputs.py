@@ -117,12 +117,8 @@ def calc_mode3_O22(row):
 
 
 def calc_O46(O21, O22, device, stall_vec=[]):
-    l_buff = []
-    p_buff = []
-    if stall_vec:
-        for l, p in stall_vec:
-            l_buff.append(l)
-            p_buff.append(p)
+    l_buff = [x[1] for x in stall_vec]
+    p_buff = [x[0] for x in stall_vec]
 
     pq_fun = P1203Pq(O21, O22, l_buff, p_buff, device)
     return pq_fun.calculate()
@@ -244,13 +240,13 @@ def main(args):
     stalling_per_db_hrc = defaultdict(dict)
     for db_id in yaml_per_db:
         for hrc_id in yaml_per_db[db_id]['hrcList']:
-            buffts = 0
+            buff_pos = 0
             buff_events = []  # ts, dur
-            for (event, ts) in yaml_per_db[db_id]['hrcList'][hrc_id]["eventList"]:
+            for (event, duration) in yaml_per_db[db_id]['hrcList'][hrc_id]["eventList"]:
                 if event in ['stall', 'buffering']:
-                    buff_events.append([buffts, ts])
+                    buff_events.append([buff_pos, duration])
                 else:
-                    buffts += ts
+                    buff_pos += duration
             stalling_per_db_hrc[db_id][hrc_id] = buff_events
 
     pvss = mode1_features["pvs_id"].unique()
@@ -331,7 +327,11 @@ def main(args):
         for device in ['mobile', 'pc']:
             for curr_mode in pvs_data['O22']:
                 O46_vals = calc_O46(
-                    pvs_data['O21'], pvs_data['O22'][curr_mode], device, pvs_data['I23']['stalling'])
+                    pvs_data['O21'],
+                    pvs_data['O22'][curr_mode],
+                    device,
+                    pvs_data['I23']['stalling']
+                )
 
                 # O21, O22, O23, O34, O35, O46, mode
                 O46_output_data = {}
