@@ -3,25 +3,15 @@
 # Create model outputs with P.1203 software.
 #
 # Requirements: install pandas, tqdm and numpy for Python.
-# Also install the itu_p1203 software. Extract the feature archives.
+# Also install the itu_p1203 software.
+#
+# Usage: put all the data in a folder called `data`,
+# and place it next to the folder where this script is run.
+# You may change the ROOT_PATH variable in the code.
 #
 # Authors: David Lindegren, Werner Robitza
 #
-# License:
-#
-# Copyright 2018 Deutsche Telekom AG, LM Ericsson, NETSCOUT Systems Inc.
-#
-# Permission is hereby granted, free of charge, to use this software for
-# non-commercial research purposes.
-#
-# NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE GRANTED BY
-# THIS LICENSE. THE DATASET IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO
-# EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-# DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-# OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE DATASET OR THE USE
-# OR OTHER DEALINGS IN THE DATASET.
+# License: MIT
 
 import os
 from itu_p1203.p1203Pv import P1203Pv
@@ -32,12 +22,13 @@ import argparse
 import json
 import numpy as np
 from tqdm import tqdm
+from collections import defaultdict
 
 tqdm.pandas()
 
 DB_IDS = ['TR04', 'TR06', 'VL04', 'VL13']
 
-ROOT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)))
+ROOT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
 
 
 def parse_mode3_features(pvs_id, features_mode3_path):
@@ -141,12 +132,12 @@ def main(args):
 
     db_data = pd.DataFrame()
 
-    O21_path = os.path.join(ROOT_PATH, 'O21.csv')
-    stalling_dir_path = os.path.join(ROOT_PATH, 'test_configs')
-    features_mode0_path = os.path.join(ROOT_PATH, 'features', 'features_mode0.csv')
-    features_mode1_path = os.path.join(ROOT_PATH, 'features', 'features_mode1.csv')
-    features_mode2_path = os.path.join(ROOT_PATH, 'features', 'features_mode2')
-    features_mode3_path = os.path.join(ROOT_PATH, 'features', 'features_mode3')
+    O21_path = os.path.join(ROOT_PATH, 'data', 'O21.csv')
+    stalling_dir_path = os.path.join(ROOT_PATH, 'data', 'test_configs')
+    features_mode0_path = os.path.join(ROOT_PATH, 'data', 'features', 'features_mode0.csv')
+    features_mode1_path = os.path.join(ROOT_PATH, 'data', 'features', 'features_mode1.csv')
+    features_mode2_path = os.path.join(ROOT_PATH, 'data', 'features', 'features_mode2')
+    features_mode3_path = os.path.join(ROOT_PATH, 'data', 'features', 'features_mode3')
 
     # read in data
     # O21
@@ -250,7 +241,7 @@ def main(args):
             quit()
 
     # parse buffering data from -config.yaml
-    stalling_per_hrc = {}
+    stalling_per_db_hrc = defaultdict(dict)
     for db_id in yaml_per_db:
         for hrc_id in yaml_per_db[db_id]['hrcList']:
             buffts = 0
@@ -260,7 +251,7 @@ def main(args):
                     buff_events.append([buffts, ts])
                 else:
                     buffts += ts
-            stalling_per_hrc[hrc_id] = buff_events
+            stalling_per_db_hrc[db_id][hrc_id] = buff_events
 
     pvss = mode1_features["pvs_id"].unique()
     per_pvs_data = {}
@@ -269,8 +260,8 @@ def main(args):
     O22_tocsv = pd.DataFrame(columns=['pvs_id', 'mode', 'sample_index', 'O22'])
     list_to_concat = []
     for pvs_id in tqdm(pvss):
-        database_id = pvs_id.split('_')[0]
-        if database_id not in DB_IDS:
+        db_id = pvs_id.split('_')[0]
+        if db_id not in DB_IDS:
             print("WARNING: Saved PVS {} not in required DBs".format(pvs_id))
             continue
         src_id = pvs_id.split('_')[1]
@@ -290,11 +281,11 @@ def main(args):
         per_pvs_data[pvs_id]['O22']['mode3'] = \
             mode3_features[mode3_features["pvs_id"] == pvs_id].sort_values(by=['sample_index'])["O22"].tolist()
 
-        per_pvs_data[pvs_id]['I23'] = {"stalling": stalling_per_hrc[hrc_id]}
+        per_pvs_data[pvs_id]['I23'] = {"stalling": stalling_per_db_hrc[db_id][hrc_id]}
 
         per_pvs_data[pvs_id]['IGen'] = {}
         per_pvs_data[pvs_id]['IGen']['displaySize'] = str(int(
-            yaml_per_db[database_id]["displayHeight"] * 1.7777778)) + 'x' + str(yaml_per_db[database_id]["displayHeight"])
+            yaml_per_db[db_id]["displayHeight"] * 1.7777778)) + 'x' + str(yaml_per_db[db_id]["displayHeight"])
 
         # this should be inserted below when producing the o46 scores
         per_pvs_data[pvs_id]['IGen']['device'] = ''
@@ -310,7 +301,7 @@ def main(args):
                 list_to_concat.append(csv_row_df)
                 csv_index += 1
 
-            os.makedirs(os.path.join(ROOT_PATH, mode_id), exist_ok=True)
+            os.makedirs(os.path.join(ROOT_PATH, 'data', mode_id), exist_ok=True)
             json_filename = os.path.join(
                 ROOT_PATH,
                 'data',
@@ -326,7 +317,7 @@ def main(args):
     print('Writing O22 CSV file ...')
     O22_tocsv = pd.concat(list_to_concat, ignore_index=True)
     O22_tocsv.to_csv(
-        os.path.join(ROOT_PATH, 'O22.csv'),
+        os.path.join(ROOT_PATH, 'data', 'O22.csv'),
         columns=['pvs_id', 'mode', 'sample_index', 'O22'],
         index=False
     )
@@ -375,7 +366,7 @@ def main(args):
 
     print('Writing O46 CSV file ...')
     O46_tocsv = pd.concat(list_to_concat, ignore_index=True)
-    outfile = os.path.join(ROOT_PATH, 'O46.csv')
+    outfile = os.path.join(ROOT_PATH, 'data', 'O46.csv')
     print('Writing to {}'.format(outfile))
     O46_tocsv.to_csv(
         outfile,
