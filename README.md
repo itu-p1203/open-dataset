@@ -9,9 +9,26 @@ This open dataset from the ITU-T P.1203 standardization procedure (P.NATS) conta
     - Mode 2 (bitstream-level, 2 percent)
     - Mode 3 (bitstream-level)
 - Subjective ratings
-- Model scores
+- Model output scores based on `itu-p1203` version 1.2.1
+
+**Note:** A previous version of this dataset contained a bug in the calculation, which lead to the wrong stalling values being used for model input. The performance reported in the ACM MMsys paper thus appears worse than it is in practice. Thanks to Tran Thi Thanh Huyen at the University of Aizu for observing this error.
 
 The data was analyzed with the [ITU-T P.1203 implementation](https://github.com/itu-p1203/itu-p1203/) from the same authors. Please carefully read the license of that software.
+
+## Performance
+
+The performance of the model as calculated based on this dataset is as follows:
+
+| Context  | Mode | Mean RMSE | Mean RMSE* | Mean PLCC | Mean SROCC |
+| -------- | ---- | --------- | ---------- | --------- | ---------- |
+| mobile   |    0 |     0.337 |          0.164 |    0.930 |     0.920 |
+| mobile   |    1 |     0.344 |          0.169 |    0.925 |     0.919 |
+| mobile   |    2 |     0.349 |          0.180 |    0.921 |     0.915 |
+| mobile   |    3 |     0.368 |          0.199 |    0.916 |     0.918 |
+| pc       |    0 |     0.445 |          0.231 |    0.883 |     0.855 |
+| pc       |    1 |     0.435 |          0.236 |    0.890 |     0.875 |
+| pc       |    2 |     0.379 |          0.182 |    0.920 |     0.915 |
+| pc       |    3 |     0.347 |          0.146 |    0.936 |     0.922 |
 
 ## Acknowledgement
 
