@@ -32,7 +32,7 @@ The performance of the model as calculated based on this dataset is as follows:
 
 ## Acknowledgement
 
-If you use this software in your research, you must
+If you use this software and data, or derivates of it, in your research, you must
 
 1. Include the link to this repository
 2. Cite the following publication:
