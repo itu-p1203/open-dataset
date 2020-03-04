@@ -15,6 +15,12 @@ This open dataset from the ITU-T P.1203 standardization procedure (P.NATS) conta
 
 The data was analyzed with the [ITU-T P.1203 implementation](https://github.com/itu-p1203/itu-p1203/) from the same authors. Please carefully read the license of that software.
 
+To re-calculate the data, you have to:
+
+- Install Python 3 and run `pip3 install --user -r requirements.txt`
+- Extract the `.tar.bz2` feature files in the `features` folder
+- Run `python3 create_model_outputs.py -c`
+
 ## Performance
 
 The performance of the model as calculated based on this dataset is as follows:
@@ -142,9 +148,9 @@ The following data relates to model output:
     - `context`: PC or mobile
     - `O46`: Integrated audiovisual quality score
 
-Detailed model output as produced by the P.1203 software:
+Detailed model input for and output as produced by the P.1203 software:
 
-- `mode0`: One JSON file for each PVS and context (PC/mobile), containing all output keys
+- `mode0`: One JSON file for each PVS and context (PC/mobile), containing all output keys, as well as one JSON file for each PVS and context (PC/mobile) with the suffix `-input.json` that can be used as input file for the P.1203 software.
 - `mode1`: same as above
 - `mode2`: same as above
 - `mode3`: same as above

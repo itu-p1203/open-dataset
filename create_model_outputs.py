@@ -28,7 +28,7 @@ tqdm.pandas()
 
 DB_IDS = ['TR04', 'TR06', 'VL04', 'VL13']
 
-ROOT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
+ROOT_PATH = os.path.abspath(os.path.dirname(__file__))
 
 
 def parse_mode3_features(pvs_id, features_mode3_path):
@@ -128,12 +128,12 @@ def main(args):
 
     db_data = pd.DataFrame()
 
-    O21_path = os.path.join(ROOT_PATH, 'data', 'O21.csv')
-    stalling_dir_path = os.path.join(ROOT_PATH, 'data', 'test_configs')
-    features_mode0_path = os.path.join(ROOT_PATH, 'data', 'features', 'features_mode0.csv')
-    features_mode1_path = os.path.join(ROOT_PATH, 'data', 'features', 'features_mode1.csv')
-    features_mode2_path = os.path.join(ROOT_PATH, 'data', 'features', 'features_mode2')
-    features_mode3_path = os.path.join(ROOT_PATH, 'data', 'features', 'features_mode3')
+    O21_path = os.path.join(ROOT_PATH, 'O21.csv')
+    stalling_dir_path = os.path.join(ROOT_PATH, 'test_configs')
+    features_mode0_path = os.path.join(ROOT_PATH, 'features', 'features_mode0.csv')
+    features_mode1_path = os.path.join(ROOT_PATH, 'features', 'features_mode1.csv')
+    features_mode2_path = os.path.join(ROOT_PATH, 'features', 'features_mode2')
+    features_mode3_path = os.path.join(ROOT_PATH, 'features', 'features_mode3')
 
     # read in data
     # O21
@@ -222,16 +222,16 @@ def main(args):
         print('Calculating mode 3 Pv')
         mode3_features['O22'] = mode3_features.progress_apply(calc_mode3_O22, axis=1)
 
-        mode0_features.to_hdf(os.path.join(ROOT_PATH, "data_original", "save.h5"), key='mode0')
-        mode1_features.to_hdf(os.path.join(ROOT_PATH, "data_original", "save.h5"), key='mode1')
-        mode2_features.to_hdf(os.path.join(ROOT_PATH, "data_original", "save.h5"), key='mode2')
-        mode3_features.to_hdf(os.path.join(ROOT_PATH, "data_original", "save.h5"), key='mode3')
+        mode0_features.to_hdf(os.path.join(ROOT_PATH, "save.h5"), key='mode0')
+        mode1_features.to_hdf(os.path.join(ROOT_PATH, "save.h5"), key='mode1')
+        mode2_features.to_hdf(os.path.join(ROOT_PATH, "save.h5"), key='mode2')
+        mode3_features.to_hdf(os.path.join(ROOT_PATH, "save.h5"), key='mode3')
     else:
-        if os.path.isfile(os.path.join(ROOT_PATH, "data_original", "save.h5")):
-            mode0_features = pd.read_hdf(os.path.join(ROOT_PATH, "data_original", "save.h5"), key='mode0')
-            mode1_features = pd.read_hdf(os.path.join(ROOT_PATH, "data_original", "save.h5"), key='mode1')
-            mode2_features = pd.read_hdf(os.path.join(ROOT_PATH, "data_original", "save.h5"), key='mode2')
-            mode3_features = pd.read_hdf(os.path.join(ROOT_PATH, "data_original", "save.h5"), key='mode3')
+        if os.path.isfile(os.path.join(ROOT_PATH, "save.h5")):
+            mode0_features = pd.read_hdf(os.path.join(ROOT_PATH, "save.h5"), key='mode0')
+            mode1_features = pd.read_hdf(os.path.join(ROOT_PATH, "save.h5"), key='mode1')
+            mode2_features = pd.read_hdf(os.path.join(ROOT_PATH, "save.h5"), key='mode2')
+            mode3_features = pd.read_hdf(os.path.join(ROOT_PATH, "save.h5"), key='mode3')
         else:
             print('No h5 file found, please rerun with -c flag')
             quit()
@@ -297,10 +297,9 @@ def main(args):
                 list_to_concat.append(csv_row_df)
                 csv_index += 1
 
-            os.makedirs(os.path.join(ROOT_PATH, 'data', mode_id), exist_ok=True)
+            os.makedirs(os.path.join(ROOT_PATH, mode_id), exist_ok=True)
             json_filename = os.path.join(
                 ROOT_PATH,
-                'data',
                 mode_id,
                 'O21O22-{}.json'.format(pvs_id)
             )
@@ -313,7 +312,7 @@ def main(args):
     print('Writing O22 CSV file ...')
     O22_tocsv = pd.concat(list_to_concat, ignore_index=True)
     O22_tocsv.to_csv(
-        os.path.join(ROOT_PATH, 'data', 'O22.csv'),
+        os.path.join(ROOT_PATH, 'O22.csv'),
         columns=['pvs_id', 'mode', 'sample_index', 'O22'],
         index=False
     )
@@ -355,9 +354,29 @@ def main(args):
                 csv_row_df = pd.DataFrame(csv_row, index=[0])
                 list_to_concat.append(csv_row_df)
 
+                # generate input report for later usage
+                input_report = {
+                    'O21': pvs_data['O21'],
+                    'O22': pvs_data['O22'][curr_mode],
+                    'IGen': {
+                        'device': device,
+                        'displaySize': '1920x1080',
+                        'viewingDistance': '150cm'
+                    },
+                    'I23': {
+                        'stalling': pvs_data['I23']['stalling']
+                    }
+                }
+                input_json_filename = json_filename = os.path.join(
+                    ROOT_PATH,
+                    curr_mode,
+                    '046-{pvs_id}-{device}-input.json'.format(**locals())
+                )
+                with open(input_json_filename, 'w') as outfile:
+                    json.dump(input_report, outfile)
+
                 json_filename = os.path.join(
                     ROOT_PATH,
-                    'data',
                     curr_mode,
                     "046-{pvs_id}-{device}.json".format(**locals())
                 )
@@ -366,7 +385,7 @@ def main(args):
 
     print('Writing O46 CSV file ...')
     O46_tocsv = pd.concat(list_to_concat, ignore_index=True)
-    outfile = os.path.join(ROOT_PATH, 'data', 'O46.csv')
+    outfile = os.path.join(ROOT_PATH, 'O46.csv')
     print('Writing to {}'.format(outfile))
     O46_tocsv.to_csv(
         outfile,
