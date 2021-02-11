@@ -177,7 +177,7 @@ Subjective test database design:
 
 ## License
 
-Copyright 2018 Deutsche Telekom AG, LM Ericsson, NETSCOUT Systems Inc.
+Copyright 2018 Deutsche Telekom AG, Ericsson AB, NETSCOUT Systems Inc.
 
 Permission is hereby granted, free of charge, to use this dataset for non-commercial research purposes.
 
@@ -187,7 +187,7 @@ NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE GRANTED BY THIS 
 
 Main developers:
 
-* David Lindegren, LM Ericsson
+* David Lindero, Ericsson AB
 * Werner Robitza, Deutsche Telekom AG / Technische Universität Ilmenau
 
 Contributors:
@@ -198,7 +198,7 @@ Contributors:
 * Peter List, Deutsche Telekom AG
 * Bernhard Feiten, Deutsche Telekom AG
 * Ulf Wüstenhagen, Deutsche Telekom AG
-* Jörgen Gustafsson, LM Ericsson
-* Gunnar Heikkilä, LM Ericsson
-* Junaid Shaikh, LM Ericsson
+* Jörgen Gustafsson, Ericsson AB
+* Gunnar Heikkilä, Ericsson AB
+* Junaid Shaikh, Ericsson AB
 * Simon Broom, NETSCOUT Systems Inc.
