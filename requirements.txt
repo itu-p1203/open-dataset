@@ -1,5 +1,5 @@
 git+https://github.com/itu-p1203/itu-p1203@v1.4.1#egg=itu-p1203
-numpy==1.17.2
+numpy==1.22.0
 tqdm==4.38.0
 pandas==0.25.1
 tables==3.6.1
